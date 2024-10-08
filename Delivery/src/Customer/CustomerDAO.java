@@ -1,6 +1,7 @@
 package Customer;
 
 import ConnectionDB.ConexaoDB;
+import Estado.Estado;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -24,7 +25,7 @@ public class CustomerDAO {
             ps.setString(4, customer.getEndereco2());
             ps.setString(5, customer.getBairro());
             ps.setString(6, customer.getCidade());
-            ps.setString(7, customer.getEstado());
+            ps.setString(7, customer.getEstado().getSigla());
             ps.setString(8, customer.getCep());
             ps.setInt(9, customer.getIdade());
             ps.setBoolean(10, customer.getPrimeira_compra());
@@ -57,12 +58,16 @@ public class CustomerDAO {
                 customer.setEndereco1(rs.getString(3));
                 customer.setEndereco2(rs.getString(4));
                 customer.setBairro(rs.getString(5));
-                customer.setCidade(rs.getString(5));
-                customer.setEstado(rs.getString(7));
+                customer.setCidade(rs.getString(6));
                 customer.setCep(rs.getString(8));
                 customer.setIdade(rs.getInt(9));
                 customer.setPrimeira_compra(rs.getBoolean(10));
                 customer.setData_nascimento(rs.getString(11));
+
+                Estado estado = new Estado();
+                estado.setSigla(rs.getString(7));
+
+                customer.setEstado(estado);
 
                 listCustomer.add(customer);
             }
@@ -87,6 +92,30 @@ public class CustomerDAO {
 
                 PreparedStatement ps = connection.prepareStatement(sql);
                 ps.setString(1, updatedValue);
+                ps.setString(2, cpf);
+                ps.executeUpdate();
+
+                connection.close();
+                ps.close();
+
+            }catch (SQLException e){
+                System.out.println("Erro to connect to the DB while customer is being updated: "+e.getMessage());
+            }
+        }
+    }
+
+    public void editCustomerInt(String cpf, String option, int updatedValue){
+
+        if(!getCustomerByCpf(cpf)){
+            System.out.println("Customer doesn't exists");
+        }else{
+            Connection connection = ConexaoDB.getConnection();
+
+            try {
+                String sql = "UPDATE tbcliente SET "+option+" = ? WHERE cpf = ?";
+
+                PreparedStatement ps = connection.prepareStatement(sql);
+                ps.setInt(1, updatedValue);
                 ps.setString(2, cpf);
                 ps.executeUpdate();
 

@@ -90,4 +90,26 @@ public class EstadoDAO {
             System.out.println("Erro ao conectar com o banco de dados!");
         }
     }
+
+    public Estado getStadoBySigla(String sigla){
+        Connection connection = ConexaoDB.getConnection();
+        String sql = "SELECT * FROM estado WHERE sigla = ?";
+
+        try{
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, sigla);
+            ResultSet rs = ps.executeQuery();
+
+            if(rs.next()){
+                Estado estado = new Estado();
+                estado.setSigla(sigla);
+                return estado;
+            }
+
+        }catch (SQLException e){
+            System.out.println("Error to get the State's sigla: "+e.getMessage());
+            return null;
+        }
+        return null;
+    }
 }

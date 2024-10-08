@@ -1,5 +1,7 @@
 package Customer;
 
+import Estado.Estado;
+
 public class Customer {
 
     private String cpf;
@@ -8,7 +10,7 @@ public class Customer {
     private String endereco2;
     private String bairro;
     private String cidade;
-    private String estado;
+    private Estado estado;
     private String cep;
     private int idade;
     private boolean primeira_compra;
@@ -26,7 +28,7 @@ public class Customer {
 
     public String getCidade() {return cidade;}
 
-    public String getEstado() {return estado;}
+    public Estado getEstado() {return estado;}
 
     public String getCep() {return cep;}
 
@@ -48,7 +50,7 @@ public class Customer {
 
     public void setCidade(String cidade) {this.cidade = cidade;}
 
-    public void setEstado(String estado) {this.estado = estado;}
+    public void setEstado(Estado estado) {this.estado = estado;}
 
     public void setCep(String cep) {this.cep = cep;}
 
