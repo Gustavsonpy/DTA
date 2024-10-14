@@ -27,18 +27,16 @@ public class ExampleFileApiApplication implements CommandLineRunner {
 		double latitude = 0.0;
 		double longitude = 0.0;
 
-		//COLOCOAR NO GIT ANTES DE VOLTAR A TRABALHAR, PARA SALVAR E CRIAR BRANCHES
-
-		do {
-			System.out.println("Digite a latitude: ");
-			latitude = Double.parseDouble(sc.nextLine());
-			if(latitude <= 0){System.out.println("\nLatitude inexistente\n");}
-			else{
-				System.out.println("Digite a longitude: ");
-				longitude = Double.parseDouble(sc.nextLine());
-				if(longitude <= 0){System.out.println("\nLongitude inexistente\n");}
-			}
-		}while(latitude <= 0 || longitude <=0);
+//		do {
+//			System.out.println("Digite a latitude: ");
+//			latitude = Double.parseDouble(sc.nextLine());
+//			if(latitude <= 0){System.out.println("\nLatitude inexistente\n");}
+//			else{
+//				System.out.println("Digite a longitude: ");
+//				longitude = Double.parseDouble(sc.nextLine());
+//				if(longitude <= 0){System.out.println("\nLongitude inexistente\n");}
+//			}
+//		}while(latitude <= 0 || longitude <=0);
 
 		String weatherData = apiServiceWeather.getWather(latitude, longitude);
 

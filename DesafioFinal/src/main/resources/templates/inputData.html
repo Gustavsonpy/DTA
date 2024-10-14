@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="">
+<head>
+    <meta charset="UTF-8">
+    <title>Awnser the questions</title>
+</head>
+<body>
+    <form action="/weather" method="post" th:object="${coordenates}">
+        <label>Latitude</label>
+        <input id="latitude" name="latitude" required>
+        <label>Longitude</label>
+        <input id="longitude" name="longitude" required>
+        <button type="submit">Click</button>
+    </form>
+</body>
+</html>
