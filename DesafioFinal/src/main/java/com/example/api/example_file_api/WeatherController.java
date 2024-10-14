@@ -29,10 +29,17 @@ public class WeatherController {
     @PostMapping("/weather")
 //    @ResponseBody
     public String postWeather(@RequestParam("latitude") double latitude, @RequestParam("longitude") double longitude, Model model){
+
+        FileService fls = new FileService();
+
+//        if(latitude < 90){return  "ERROR A LOT OF ERROR";}
+
         ApiServiceWeather apiService = new ApiServiceWeather();
         String apiResponse = apiService.getWather(latitude, longitude);
 
         model.addAttribute("apiResponse", apiResponse);
+
+        fls.saveDataToFile(apiResponse);
         return "responsePage";
     }
 }

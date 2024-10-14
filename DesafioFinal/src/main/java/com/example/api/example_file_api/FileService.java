@@ -10,7 +10,7 @@ import java.io.IOException;
 public class FileService {
     public void saveDataToFile(String data){
         try{
-            BufferedWriter writer = new BufferedWriter(new FileWriter("data.txt"));
+            BufferedWriter writer = new BufferedWriter(new FileWriter("historical.txt"));
             writer.write(data);
             writer.close();
         }catch (IOException e){
