@@ -1,5 +1,7 @@
 package com.example.api.example_file_api;
 
+import com.example.api.example_file_api.utils.ApiServiceWeather;
+import com.example.api.example_file_api.utils.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -38,12 +40,12 @@ public class ExampleFileApiApplication implements CommandLineRunner {
 //			}
 //		}while(latitude <= 0 || longitude <=0);
 
-		String weatherData = apiServiceWeather.getWather(latitude, longitude);
+//		String weatherData = apiServiceWeather.getWather(latitude, longitude);
 
-		System.out.println("Api: "+weatherData);
+//		System.out.println("Api: "+weatherData);
 
 		// Salvar dados no arquivo
-		fileService.saveDataToFile(weatherData);
+//		fileService.saveDataToFile(weatherData);
 	}
 
 }

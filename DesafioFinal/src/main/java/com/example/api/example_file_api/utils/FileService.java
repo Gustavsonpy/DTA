@@ -1,4 +1,4 @@
-package com.example.api.example_file_api;
+package com.example.api.example_file_api.utils;
 
 import org.springframework.stereotype.Service;
 

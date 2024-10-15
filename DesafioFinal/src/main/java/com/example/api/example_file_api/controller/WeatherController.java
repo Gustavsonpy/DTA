@@ -1,5 +1,8 @@
-package com.example.api.example_file_api;
+package com.example.api.example_file_api.controller;
 
+import com.example.api.example_file_api.utils.ApiServiceWeather;
+import com.example.api.example_file_api.Class.Weather;
+import com.example.api.example_file_api.utils.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,19 +30,21 @@ public class WeatherController {
     }
 
     @PostMapping("/weather")
-//    @ResponseBody
     public String postWeather(@RequestParam("latitude") double latitude, @RequestParam("longitude") double longitude, Model model){
 
         FileService fls = new FileService();
-
-//        if(latitude < 90){return  "ERROR A LOT OF ERROR";}
-
         ApiServiceWeather apiService = new ApiServiceWeather();
-        String apiResponse = apiService.getWather(latitude, longitude);
 
-        model.addAttribute("apiResponse", apiResponse);
+        if(latitude < -90 || latitude > 90 || longitude < -180 || longitude > 180){
+          return "Error with values";
+        }
 
-        fls.saveDataToFile(apiResponse);
+        WeatherInfo weatherInfo = apiService.getWather(latitude, longitude);
+
+        model.addAttribute("temperature", weatherInfo.getTemperature());
+        model.addAttribute("dateTime", weatherInfo.getDateTime());
+
+//        fls.saveDataToFile(currentTemperature);
         return "responsePage";
     }
 }
